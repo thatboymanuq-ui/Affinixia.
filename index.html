@@ -3,87 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AFFINIXIA | Sovereign E-Commerce</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <title>AFFINIXIA | Sovereign Core</title>
     <style>
-        :root { --gold: #d4af37; --bg: #000; --verify: #FFD700; --card: #0a0a0a; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Space Grotesk', sans-serif; }
-        body { background: var(--bg); color: #fff; line-height: 1.6; overflow-x: hidden; }
-        #bg-canvas { position: fixed; inset: 0; z-index: -1; opacity: 0.15; }
-        .v-badge { display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px; background-color: var(--verify); clip-path: polygon(100% 50%, 94% 67%, 81% 81%, 67% 94%, 50% 100%, 33% 94%, 19% 81%, 6% 67%, 0% 50%, 6% 33%, 19% 19%, 33% 6%, 50% 0%, 67% 6%, 81% 19%, 94% 33%); margin-left: 6px; position: relative; vertical-align: middle; }
-        .v-badge::after { content: ''; position: absolute; width: 3px; height: 6px; border: solid black; border-width: 0 2px 2px 0; transform: rotate(45deg); margin-top: -1px; }
-        header { padding: 25px 5%; border-bottom: 1px solid #111; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; }
-        .logo { font-weight: 700; letter-spacing: 5px; color: var(--gold); }
-        section { padding: 40px 8%; max-width: 1200px; margin: 0 auto; }
-        .board { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 40px; }
-        .card { background: var(--card); border: 1px solid #111; padding: 30px; border-radius: 24px; }
-        .name { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
-        .bio { color: #888; font-size: 14px; }
-        #chat-hub { background: #050505; border: 1px solid #111; border-radius: 30px; padding: 30px; }
-        #display { height: 350px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; scrollbar-width: none; }
-        .tag { font-size: 9px; color: var(--gold); letter-spacing: 2px; font-weight: 700; margin-bottom: 4px; }
-        .txt { color: #ccc; font-size: 15px; background: rgba(255,255,255,0.03); padding: 12px; border-radius: 12px; display: inline-block; max-width: 90%; }
-        .input-bar { display: flex; background: #000; border: 1px solid #222; border-radius: 18px; padding: 8px; margin-top: 20px; }
-        input { flex: 1; background: transparent; border: none; color: #fff; padding: 10px; outline: none; }
-        .send { background: var(--gold); border: none; padding: 0 25px; border-radius: 10px; font-weight: 800; cursor: pointer; }
+        body { background: #000; color: #d4af37; font-family: sans-serif; padding: 20px; }
+        .card { border: 1px solid #222; padding: 15px; border-radius: 10px; margin-bottom: 20px; }
+        #chat { height: 300px; overflow-y: auto; border: 1px solid #111; padding: 10px; margin-bottom: 10px; }
+        input { width: 70%; padding: 10px; background: #111; color: #fff; border: 1px solid #333; }
+        button { padding: 10px; background: #d4af37; color: #000; font-weight: bold; cursor: pointer; }
     </style>
 </head>
 <body>
-    <canvas id="bg-canvas"></canvas>
-    <header>
-        <div class="logo">AFFINIXIA <span class="v-badge"></span></div>
-        <div style="font-size: 9px; color: #00ff00;">● SYSTEM LIVE</div>
-    </header>
-    <section>
-        <div class="board">
-            <div class="card">
-                <div style="font-size:10px; color:var(--gold);">CHIEF ARCHITECT</div>
-                <div class="name">Manufor Glory Ebube <span class="v-badge"></span></div>
-                <p class="bio">Lead visionary and architect of the Affinixia sovereign framework.</p>
-            </div>
-            <div class="card">
-                <div style="font-size:10px; color:var(--gold);">CO-FOUNDER // THE BRAIN</div>
-                <div class="name">Emmanuel Opoke Obinna <span class="v-badge"></span></div>
-                <p class="bio">Expert graphics designer and web developer. Specializes in creative design and functional web solutions for digital growth.</p>
-            </div>
-        </div>
-        <div id="chat-hub">
-            <div id="display">
-                <div class="msg"><div class="tag">AFFINIXIA</div><div class="txt">Core online. How can I assist you today?</div></div>
-            </div>
-            <div class="input-bar">
-                <input type="text" id="userInput" placeholder="Ask anything..." onkeypress="if(event.key==='Enter') transmit()">
-                <button class="send" onclick="transmit()">SEND</button>
-            </div>
-        </div>
-    </section>
+    <h1>AFFINIXIA CORE</h1>
+    <div class="card">
+        <strong>Manufor Glory Ebube</strong> (Chief Architect)<br>
+        <strong>Emmanuel Opoke Obinna</strong> (The Brain / Co-Founder)
+    </div>
+    <div id="chat">Welcome. Type a message to begin.</div>
+    <input type="text" id="userInput" placeholder="Ask the AI...">
+    <button onclick="askAI()">SEND</button>
+
     <script>
         const TOKEN = "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";
-        async function transmit() {
+        
+        async function askAI() {
             const input = document.getElementById('userInput');
-            const txt = input.value.trim();
-            if(!txt) return;
-            addMsg('USER', txt);
+            const chat = document.getElementById('chat');
+            const userText = input.value;
+            if(!userText) return;
+
+            chat.innerHTML += `<p style="color:white"><b>User:</b> ${userText}</p>`;
             input.value = "";
-            const load = addMsg('AFFINIXIA', "Thinking...");
+            const loading = document.createElement('p');
+            loading.innerText = "Affinixia is thinking...";
+            chat.appendChild(loading);
+
             try {
                 const response = await fetch("https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2", {
                     method: "POST",
-                    headers: { "Authorization": `Bearer ${TOKEN}`, "Content-Type": "application/json" },
-                    body: JSON.stringify({ inputs: `[INST] You are Affinixia AI by Manufor Glory Ebube and Emmanuel Opoke Obinna. ${txt} [/INST]` })
+                    headers: { 
+                        "Authorization": `Bearer ${TOKEN}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ inputs: userText })
                 });
+
                 const data = await response.json();
-                load.innerText = data[0].generated_text.split("[/INST]")[1] || "Core responding...";
-            } catch (e) { load.innerText = "Error: Use a host like Netlify to enable the AI bridge."; }
-        }
-        function addMsg(who, text) {
-            const d = document.getElementById('display');
-            const m = document.createElement('div');
-            m.innerHTML = `<div class="tag">${who}</div><div class="txt">${text}</div>`;
-            d.appendChild(m);
-            d.scrollTop = d.scrollHeight;
-            return m.querySelector('.txt');
+                loading.remove();
+                
+                // This handles the Hugging Face response format correctly
+                const aiResponse = data[0].generated_text || data.generated_text || "Core response error.";
+                chat.innerHTML += `<p><b>Affinixia:</b> ${aiResponse}</p>`;
+                chat.scrollTop = chat.scrollHeight;
+
+            } catch (error) {
+                loading.innerText = "Bridge Error: Still blocked. Please check Netlify Logs.";
+                console.error(error);
+            }
         }
     </script>
 </body>
 </html>
+
