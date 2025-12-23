@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-!html lang="en"<
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AFFINIXIA | Official Luxury Hub</title>
+    <title>AFFINIXIA | Luxury Marketplace</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     
@@ -13,15 +13,16 @@
         
         body { margin: 0; background: #ffffff; color: var(--text); overflow-x: hidden; }
 
-        /* --- LUXURY HEADER --- */
+        /* --- NAVIGATION --- */
         nav { 
             padding: 20px 5%; display: flex; justify-content: space-between; align-items: center;
             background: var(--white); position: sticky; top: 0; z-index: 1000;
             border-bottom: 2px solid var(--accent);
         }
         .logo { font-weight: 800; font-size: 26px; letter-spacing: 5px; color: var(--gold); text-transform: uppercase; cursor: pointer; }
+        .secure-badge { font-size: 10px; font-weight: 800; border: 1px solid var(--gold); padding: 4px 10px; border-radius: 4px; color: var(--gold); text-transform: uppercase; }
 
-        /* --- CATEGORY NAVIGATION --- */
+        /* --- CATEGORIES --- */
         .category-bar {
             background: var(--white); padding: 15px 5%; display: flex; justify-content: center; gap: 12px;
             overflow-x: auto; white-space: nowrap; border-bottom: 1px solid var(--accent);
@@ -32,7 +33,7 @@
         }
         .cat-btn:hover, .cat-btn.active { border-color: var(--gold); color: var(--gold); background: var(--white); }
 
-        /* --- PRODUCT GRID --- */
+        /* --- GRID --- */
         .main-container { max-width: 1400px; margin: 30px auto; padding: 0 20px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
 
@@ -50,7 +51,6 @@
             width: 100%; padding: 15px; border: none; background: var(--gold); color: white; 
             border-radius: 10px; font-weight: 800; cursor: pointer; text-transform: uppercase;
         }
-        .btn-action:hover { background: #b08d4a; }
 
         /* --- CENTERED FOOTER --- */
         footer { 
@@ -58,11 +58,10 @@
         }
         .footer-logo { font-size: 22px; letter-spacing: 8px; color: var(--gold); margin-bottom: 15px; display: block; font-weight: 800; }
         .social-links { display: flex; justify-content: center; gap: 25px; margin-bottom: 25px; }
-        .social-links a { color: var(--gold); font-size: 24px; text-decoration: none; transition: 0.3s; }
-        .social-links a:hover { transform: scale(1.2); color: #222; }
+        .social-links a { color: var(--gold); font-size: 24px; text-decoration: none; }
         .footer-info { color: #888; font-size: 11px; line-height: 1.8; letter-spacing: 1px; }
 
-        /* --- AI PAYMENT GATEWAY --- */
+        /* --- AI GATEWAY --- */
         #ai-gate { 
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(255,255,255,0.98); z-index: 5000; flex-direction: column; align-items: center; justify-content: center;
@@ -70,13 +69,10 @@
         .ai-loader { width: 50px; height: 50px; border: 4px solid var(--accent); border-top-color: var(--gold); border-radius: 50%; animation: spin 1s infinite linear; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* --- MOBILE GRID --- */
         @media (max-width: 768px) {
             .grid { grid-template-columns: 1fr 1fr; gap: 10px; }
             .card { padding: 12px; }
             .card img { height: 140px; }
-            .card-title { font-size: 12px; height: 32px; }
-            .card-price { font-size: 17px; }
         }
     </style>
 </head>
@@ -89,7 +85,7 @@
 
 <nav>
     <div class="logo" onclick="location.reload()">AFFINIXIA</div>
-    <div style="font-size: 10px; font-weight: 800; border: 1px solid var(--gold); padding: 4px 10px; border-radius: 4px; color: var(--gold);">SECURE PLATFORM</div>
+    <div class="secure-badge">Secure Platform</div>
 </nav>
 
 <div class="category-bar">
@@ -106,12 +102,10 @@
 
 <footer>
     <span class="footer-logo">AFFINIXIA</span>
-    
     <div class="social-links">
         <a href="https://instagram.com/affinixia_official" target="_blank"><i class="fab fa-instagram"></i></a>
         <a href="https://wa.me/2347046239741" target="_blank"><i class="fab fa-whatsapp"></i></a>
     </div>
-
     <div class="footer-info">
         ARCHITECTS: <b>MANUFOR GLORY & EMMANUEL OPOKE OBINNA</b><br>
         SYSTEM POWERED BY SOVEREIGN AI PROTOCOL<br>
@@ -123,10 +117,12 @@
     let products = [];
 
     async function init() {
-        const res = await fetch('https://dummyjson.com/products?limit=100');
-        const data = await res.json();
-        products = data.products;
-        render(products);
+        try {
+            const res = await fetch('https://dummyjson.com/products?limit=100');
+            const data = await res.json();
+            products = data.products;
+            render(products);
+        } catch (e) { console.log("System Sync Error"); }
     }
 
     function render(list) {
