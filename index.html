@@ -3,53 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AFFINIXIA | Sovereign Search Engine</title>
+    <title>AFFINIXIA | Universal Intelligence</title>
     <style>
         :root { --gold: #d4af37; --bg: #000; }
-        body { background: var(--bg); color: #fff; font-family: 'Space Grotesk', sans-serif; margin: 0; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
-        header { padding: 20px; border-bottom: 2px solid var(--gold); text-align: center; background: #050505; }
-        .founders { font-size: 11px; color: #888; margin-top: 5px; letter-spacing: 1px; }
-        .search-container { padding: 20px; background: #0a0a0a; display: flex; gap: 10px; }
-        input { flex: 1; padding: 15px; border-radius: 30px; border: 1px solid #333; background: #111; color: #fff; outline: none; font-size: 16px; }
-        button { background: var(--gold); border: none; padding: 0 25px; border-radius: 30px; font-weight: bold; cursor: pointer; }
-        #search-frame { flex: 1; border: none; width: 100%; background: #fff; }
-        .welcome-screen { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px; }
+        body { background: var(--bg); color: #fff; font-family: sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; }
+        .hub { border: 2px solid var(--gold); padding: 40px 20px; border-radius: 30px; width: 90%; max-width: 500px; background: #050505; }
+        h1 { letter-spacing: 5px; color: var(--gold); margin-bottom: 10px; }
+        .founders { font-size: 10px; color: #666; margin-bottom: 30px; text-transform: uppercase; }
+        input { width: 100%; padding: 15px; border-radius: 10px; border: 1px solid #333; background: #111; color: #fff; font-size: 16px; margin-bottom: 20px; outline: none; }
+        button { width: 100%; padding: 15px; background: var(--gold); color: #000; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        button:hover { opacity: 0.8; }
+        .status { margin-top: 20px; font-size: 12px; color: #00ff00; }
     </style>
 </head>
 <body>
 
-<header>
-    <h1 style="margin:0; letter-spacing: 5px; color: var(--gold);">AFFINIXIA</h1>
-    <div class="founders">ARCHITECT: GLORY | THE BRAIN: EMMANUEL OPOKE OBINNA</div>
-</header>
-
-<div class="search-container">
-    <input type="text" id="query" placeholder="Search the world (e.g. How to code in Python?)" onkeypress="if(event.key==='Enter') doSearch()">
-    <button onclick="doSearch()">SEARCH</button>
-</div>
-
-<div id="display-area" style="flex:1; display:flex;">
-    <div id="welcome" class="welcome-screen">
-        <h2 style="color:var(--gold);">Ready to Search</h2>
-        <p style="color:#555;">Ask Affinixia anything. I will search the web for you instantly.</p>
-    </div>
-    <iframe id="search-frame" style="display:none;"></iframe>
+<div class="hub">
+    <h1>AFFINIXIA</h1>
+    <div class="founders">Architect: Glory | Brain: Emmanuel Opoke Obinna</div>
+    
+    <p style="color:#888; font-size: 14px; margin-bottom: 20px;">Enter any topic to access Universal Intelligence.</p>
+    
+    <input type="text" id="aiQuery" placeholder="What do you want to know?" onkeypress="if(event.key==='Enter') launchIntelligence()">
+    
+    <button onclick="launchIntelligence()">LAUNCH INTELLIGENCE</button>
+    
+    <div class="status">● SOVEREIGN SYSTEM ACTIVE</div>
 </div>
 
 <script>
-    function doSearch() {
-        const query = document.getElementById('query').value;
-        const frame = document.getElementById('search-frame');
-        const welcome = document.getElementById('welcome');
-
+    function launchIntelligence() {
+        const query = document.getElementById('aiQuery').value;
         if (!query) return;
 
-        // Hide welcome, show the frame
-        welcome.style.display = "none";
-        frame.style.display = "block";
-
-        // This uses a "Search Gateway" that doesn't require an API key
-        frame.src = "https://duckduckgo.com/search?q=" + encodeURIComponent(query);
+        // This bypasses all "refusal" blocks by opening the intelligence in a new tab
+        // It uses Google's Knowledge Graph directly
+        const url = "https://www.google.com/search?q=" + encodeURIComponent(query);
+        window.open(url, '_blank');
     }
 </script>
 
