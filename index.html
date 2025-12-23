@@ -3,179 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AFFINIXIA | Luxury Gadgets & Goods</title>
+    <title>AFFINIXIA | AI Automated Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #d4af37; --dark: #050505; --card: #ffffff; --konga: #ed017f; }
-        * { box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { margin: 0; background: #f8f9fa; color: #1a1a1a; }
-
-        /* Modern Navigation */
-        nav { background: var(--dark); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        .logo { color: var(--gold); font-weight: 800; font-size: 24px; letter-spacing: 3px; cursor: pointer; }
-        .nav-tools { display: flex; gap: 20px; align-items: center; }
-        .cart-status { background: var(--gold); color: #000; padding: 8px 18px; border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 14px; }
-
-        /* Layout Structure */
-        .main-wrapper { display: flex; max-width: 1400px; margin: 20px auto; gap: 20px; padding: 0 20px; }
+        :root { --gold: #d4af37; --cyber-blue: #00f2ff; --dark: #0a0a0b; --glass: rgba(255, 255, 255, 0.03); }
+        * { box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; transition: all 0.3s ease; }
         
-        /* Sidebar Filter */
-        aside { width: 250px; background: white; border-radius: 15px; padding: 20px; height: fit-content; border: 1px solid #eee; position: sticky; top: 90px; }
-        aside h4 { margin-top: 0; border-bottom: 2px solid var(--gold); padding-bottom: 10px; }
-        .filter-btn { display: block; width: 100%; text-align: left; padding: 10px; border: none; background: none; cursor: pointer; border-radius: 8px; transition: 0.2s; }
-        .filter-btn:hover { background: #fff5f5; color: var(--konga); }
+        body { margin: 0; background: var(--dark); color: #ffffff; overflow-x: hidden; }
 
-        /* Product Grid: Side-by-Side */
-        .content-area { flex: 1; }
+        /* AI Protocol Header */
+        nav { 
+            background: rgba(10, 10, 11, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 20px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 1000;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .logo { 
+            font-weight: 800; font-size: 26px; letter-spacing: 5px; color: var(--gold);
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Layout Container */
+        .app-container { display: flex; max-width: 1600px; margin: 30px auto; gap: 30px; padding: 0 20px; }
+
+        /* Sidebar: Protocol Filters */
+        aside { 
+            width: 280px; background: var(--glass); border-radius: 24px; padding: 30px; 
+            height: fit-content; border: 1px solid rgba(255,255,255,0.1);
+            position: sticky; top: 110px;
+        }
+        .filter-btn { 
+            display: block; width: 100%; text-align: left; padding: 12px 20px; 
+            margin-bottom: 8px; border: none; background: transparent; color: #aaa;
+            cursor: pointer; border-radius: 12px; font-weight: 600;
+        }
+        .filter-btn:hover, .filter-btn.active { 
+            background: var(--gold); color: black; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Side-by-Side Product Grid */
+        .content-main { flex: 1; }
         .product-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
-            gap: 20px; 
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            gap: 25px; 
         }
 
-        /* Luxury Cards */
+        /* Cyber Product Card */
         .card { 
-            background: white; 
-            border-radius: 20px; 
-            padding: 15px; 
-            border: 1px solid #eee; 
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-            display: flex; 
-            flex-direction: column;
-            justify-content: space-between;
+            background: var(--glass); border-radius: 28px; padding: 20px;
+            border: 1px solid rgba(255,255,255,0.05); position: relative;
+            display: flex; flex-direction: column; justify-content: space-between;
         }
-        .card:hover { transform: translateY(-10px); box-shadow: 0 20px 30px rgba(0,0,0,0.05); border-color: var(--gold); }
-        .card img { width: 100%; height: 180px; object-fit: contain; border-radius: 12px; background: #fafafa; }
-        .card-info { padding: 15px 5px; }
-        .card-cat { font-size: 10px; text-transform: uppercase; color: #999; letter-spacing: 1px; }
-        .card-title { font-size: 15px; font-weight: 600; margin: 5px 0; color: #333; height: 40px; overflow: hidden; }
-        .card-price { font-size: 20px; font-weight: 800; color: var(--dark); margin: 10px 0; }
+        .card:hover { 
+            border-color: var(--gold); background: rgba(255,255,255,0.06);
+            transform: translateY(-10px);
+        }
+        .card img { 
+            width: 100%; height: 220px; object-fit: contain; 
+            border-radius: 20px; background: rgba(0,0,0,0.2);
+        }
+        .card-tag { 
+            position: absolute; top: 30px; right: 30px; background: var(--gold);
+            color: black; font-size: 10px; font-weight: 800; padding: 4px 10px; border-radius: 8px;
+        }
+        .price { font-size: 24px; font-weight: 800; color: #fff; margin: 15px 0; }
         
         .buy-btn { 
-            background: var(--dark); 
-            color: white; 
-            border: none; 
-            padding: 12px; 
-            border-radius: 12px; 
-            font-weight: 600; 
-            cursor: pointer; 
-            transition: 0.3s;
+            width: 100%; background: white; color: black; border: none;
+            padding: 15px; border-radius: 15px; font-weight: 800; cursor: pointer;
         }
-        .buy-btn:hover { background: var(--konga); }
+        .buy-btn:hover { background: var(--gold); letter-spacing: 1px; }
 
-        /* Footer */
-        footer { background: var(--dark); color: #888; padding: 60px 5%; margin-top: 50px; }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
-        .footer-col h5 { color: white; margin-bottom: 20px; font-size: 18px; }
-        .copyright { text-align: center; padding-top: 40px; margin-top: 40px; border-top: 1px solid #222; font-size: 12px; }
+        /* Automated Footer */
+        footer { 
+            background: #000; padding: 80px 10%; margin-top: 100px;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 50px; }
+        .founder-tag { color: var(--gold); font-size: 12px; letter-spacing: 2px; margin-bottom: 10px; display: block;}
 
-        /* Mobile Adjustments */
+        /* Mobile Optimization: Force Side-by-Side */
         @media (max-width: 768px) {
-            .main-wrapper { flex-direction: column; }
-            aside { width: 100%; position: relative; top: 0; }
-            .product-grid { grid-template-columns: 1fr 1fr; gap: 10px; } /* Side by side on mobile */
-            .card { padding: 10px; }
+            .app-container { flex-direction: column; }
+            aside { width: 100%; position: relative; top: 0; display: flex; overflow-x: auto; gap: 10px; padding: 15px; }
+            .filter-btn { white-space: nowrap; width: auto; }
+            .product-grid { grid-template-columns: 1fr 1fr; gap: 15px; } /* Essential side-by-side */
+            .card { padding: 12px; border-radius: 15px; }
             .card img { height: 140px; }
+            .price { font-size: 18px; }
         }
     </style>
 </head>
 <body>
 
 <nav>
-    <div class="logo" onclick="location.reload()">AFFINIXIA</div>
-    <div class="nav-tools">
-        <div class="cart-status" id="cart-btn">CART (0)</div>
-    </div>
+    <div class="logo">AFFINIXIA</div>
+    <div id="status-light" style="color: var(--cyber-blue); font-size: 12px; font-weight: bold;">● AI PROTOCOL ACTIVE</div>
 </nav>
 
-<div class="main-wrapper">
-    <aside>
-        <h4>Categories</h4>
-        <button class="filter-btn" onclick="filter('All')">✨ All Products</button>
-        <button class="filter-btn" onclick="filter('Beauty')">💄 Beauty</button>
-        <button class="filter-btn" onclick="filter('Fragrances')">🌬️ Fragrances</button>
-        <button class="filter-btn" onclick="filter('Furniture')">🛋️ Furniture</button>
-        <button class="filter-btn" onclick="filter('Groceries')">🍎 Groceries</button>
-        <hr style="border:0; border-top:1px solid #eee; margin: 20px 0;">
-        <p style="font-size: 11px; color:#999">Curated by<br><b>Emmanuel & Glory</b></p>
+<div class="app-container">
+    <aside id="sidebar">
+        <span class="founder-tag">SYSTEM FILTERS</span>
+        <button class="filter-btn active" onclick="loadCategory('all')">OVERVIEW</button>
+        <button class="filter-btn" onclick="loadCategory('laptops')">LAPTOPS</button>
+        <button class="filter-btn" onclick="loadCategory('smartphones')">SMARTPHONES</button>
+        <button class="filter-btn" onclick="loadCategory('fragrances')">FRAGRANCE</button>
+        <button class="filter-btn" onclick="loadCategory('furniture')">INTERIOR</button>
     </aside>
 
-    <main class="content-area">
-        <h2 id="view-title">New Arrivals</h2>
-        <div class="product-grid" id="grid">
+    <main class="content-main">
+        <h1 id="cat-title" style="margin-bottom: 40px; font-weight: 300;">Scanning <span style="color: var(--gold)">Affinixia Database...</span></h1>
+        <div class="product-grid" id="main-grid">
             </div>
     </main>
 </div>
 
 <footer>
     <div class="footer-grid">
-        <div class="footer-col">
-            <div class="logo">AFFINIXIA</div>
-            <p>The sovereign choice for high-end gadgets and lifestyle essentials. Quality guaranteed.</p>
+        <div>
+            <div class="logo" style="font-size: 20px;">AFFINIXIA</div>
+            <p style="color: #666; line-height: 1.8;">Automated supply chain protocol for elite tech and lifestyle assets. Engineered by the Affinixia Sovereign Group.</p>
         </div>
-        <div class="footer-col">
-            <h5>Founders</h5>
-            <p>Manufor Glory Ebube<br><i>Chief Architect</i></p>
-            <p>Emmanuel Opoke Obinna<br><i>Digital Intelligence</i></p>
+        <div>
+            <span class="founder-tag">ARCHITECTS</span>
+            <p>Emmanuel Opoke<br>Manufor Glory</p>
         </div>
-        <div class="footer-col">
-            <h5>Customer Support</h5>
-            <p>Shipping Policy</p>
-            <p>Return Track</p>
-            <p>Affinixia SafePay</p>
+        <div>
+            <span class="founder-tag">SECURITY</span>
+            <p>SSL Encryption<br>AI Fraud Protocol<br>24/7 Monitoring</p>
         </div>
-    </div>
-    <div class="copyright">
-        &copy; 2025 AFFINIXIA GLOBAL. All Rights Reserved. Designed for Excellence.
     </div>
 </footer>
 
 <script>
-    // DATA AUTOMATION: Using the JSON you provided
-    const rawData = [
-        {"id":1,"title":"Essence Mascara Lash Princess","category":"beauty","price":9.99,"img":"https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/thumbnail.webp"},
-        {"id":2,"title":"Eyeshadow Palette with Mirror","category":"beauty","price":19.99,"img":"https://cdn.dummyjson.com/product-images/beauty/eyeshadow-palette-with-mirror/thumbnail.webp"},
-        {"id":3,"title":"Powder Canister","category":"beauty","price":14.99,"img":"https://cdn.dummyjson.com/product-images/beauty/powder-canister/thumbnail.webp"},
-        {"id":6,"title":"Calvin Klein CK One","category":"fragrances","price":49.99,"img":"https://cdn.dummyjson.com/product-images/fragrances/calvin-klein-ck-one/thumbnail.webp"},
-        {"id":7,"title":"Chanel Coco Noir Eau De","category":"fragrances","price":129.99,"img":"https://cdn.dummyjson.com/product-images/fragrances/chanel-coco-noir-eau-de/thumbnail.webp"},
-        {"id":11,"title":"Annibale Colombo Bed","category":"furniture","price":1899.99,"img":"https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-bed/thumbnail.webp"},
-        {"id":12,"title":"Annibale Colombo Sofa","category":"furniture","price":2499.99,"img":"https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-sofa/thumbnail.webp"},
-        {"id":17,"title":"Beef Steak","category":"groceries","price":12.99,"img":"https://cdn.dummyjson.com/product-images/groceries/beef-steak/thumbnail.webp"},
-        {"id":22,"title":"Dog Food","category":"groceries","price":10.99,"img":"https://cdn.dummyjson.com/product-images/groceries/dog-food/thumbnail.webp"},
-        {"id":30,"title":"Kiwi","category":"groceries","price":2.49,"img":"https://cdn.dummyjson.com/product-images/groceries/kiwi/thumbnail.webp"}
-    ];
+    const grid = document.getElementById('main-grid');
 
-    let cartCount = 0;
+    // THE AI PROTOCOL: Automated Data Fetching
+    async function initProtocol(category = '') {
+        grid.innerHTML = `<p style="color: var(--gold)">Re-routing data packets...</p>`;
+        
+        let url = 'https://dummyjson.com/products?limit=100'; // FETCING 100 PRODUCTS AUTOMATICALLY
+        if(category && category !== 'all') {
+            url = `https://dummyjson.com/products/category/${category}`;
+        }
 
-    function render(items) {
-        const grid = document.getElementById('grid');
-        grid.innerHTML = items.map(p => `
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            displayProducts(data.products);
+            document.getElementById('cat-title').innerHTML = `Protocol: <span style="color:var(--gold)">${category.toUpperCase() || 'GLOBAL'}</span>`;
+        } catch (error) {
+            grid.innerHTML = `<p>Protocol Error: Connection Interrupted</p>`;
+        }
+    }
+
+    function displayProducts(products) {
+        grid.innerHTML = products.map(p => `
             <div class="card">
+                <span class="card-tag">NEW ITEM</span>
                 <div>
-                    <img src="${p.img}" alt="${p.title}">
-                    <div class="card-info">
-                        <div class="card-cat">${p.category}</div>
-                        <div class="card-title">${p.title}</div>
-                        <div class="card-price">$${p.price}</div>
-                    </div>
+                    <img src="${p.thumbnail}" alt="Tech Asset">
+                    <h3 style="font-size: 16px; margin: 15px 0 5px 0;">${p.title}</h3>
+                    <p style="font-size: 12px; color: #666; margin-bottom: 10px;">${p.brand || 'Premium'}</p>
+                    <div class="price">$${p.price}</div>
                 </div>
-                <button class="buy-btn" onclick="addToCart()">ADD TO CART</button>
+                <button class="buy-btn" onclick="alert('Item locked in cart!')">ACQUIRE ASSET</button>
             </div>
         `).join('');
     }
 
-    function filter(cat) {
-        document.getElementById('view-title').innerText = cat === 'All' ? 'New Arrivals' : cat;
-        if(cat === 'All') render(rawData);
-        else render(rawData.filter(p => p.category.toLowerCase() === cat.toLowerCase()));
+    function loadCategory(cat) {
+        // Update button UI
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+        initProtocol(cat);
     }
 
-    function addToCart() {
-        cartCount++;
-        document.getElementById('cart-btn').innerText = `CART (${cartCount})`;
-    }
-
-    // Initialize with all products
-    render(rawData);
+    // Start the automation
+    initProtocol();
 </script>
 
 </body>
