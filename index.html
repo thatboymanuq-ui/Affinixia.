@@ -1,180 +1,183 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AFFINIXIA | Gadget Megastore</title>
+    <title>AFFINIXIA | Luxury Gadgets & Goods</title>
     <style>
-        :root { --konga-red: #ed017f; --dark: #1a1a1a; --gold: #d4af37; }
-        * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { margin: 0; background: #f4f4f4; color: #333; }
+        :root { --gold: #d4af37; --dark: #050505; --card: #ffffff; --konga: #ed017f; }
+        * { box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { margin: 0; background: #f8f9fa; color: #1a1a1a; }
+
+        /* Modern Navigation */
+        nav { background: var(--dark); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .logo { color: var(--gold); font-weight: 800; font-size: 24px; letter-spacing: 3px; cursor: pointer; }
+        .nav-tools { display: flex; gap: 20px; align-items: center; }
+        .cart-status { background: var(--gold); color: #000; padding: 8px 18px; border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 14px; }
+
+        /* Layout Structure */
+        .main-wrapper { display: flex; max-width: 1400px; margin: 20px auto; gap: 20px; padding: 0 20px; }
         
-        /* Navigation */
-        header { background: var(--dark); color: white; position: sticky; top: 0; z-index: 1000; }
-        .top-nav { display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; border-bottom: 1px solid #333; }
-        .logo { font-weight: 900; color: var(--gold); letter-spacing: 2px; font-size: 22px; cursor: pointer; }
-        .search-bar { flex: 1; margin: 0 20px; display: flex; }
-        .search-bar input { width: 100%; padding: 10px; border-radius: 4px 0 0 4px; border: none; outline: none; }
-        .search-bar button { background: var(--gold); border: none; padding: 10px 20px; border-radius: 0 4px 4px 0; cursor: pointer; font-weight: bold; }
-        .cart-icon { position: relative; cursor: pointer; }
-        #cart-count { background: var(--konga-red); color: white; border-radius: 50%; padding: 2px 6px; font-size: 10px; position: absolute; top: -10px; right: -10px; }
+        /* Sidebar Filter */
+        aside { width: 250px; background: white; border-radius: 15px; padding: 20px; height: fit-content; border: 1px solid #eee; position: sticky; top: 90px; }
+        aside h4 { margin-top: 0; border-bottom: 2px solid var(--gold); padding-bottom: 10px; }
+        .filter-btn { display: block; width: 100%; text-align: left; padding: 10px; border: none; background: none; cursor: pointer; border-radius: 8px; transition: 0.2s; }
+        .filter-btn:hover { background: #fff5f5; color: var(--konga); }
 
-        /* Categories */
-        .cat-bar { background: #fff; padding: 10px 20px; display: flex; gap: 20px; overflow-x: auto; white-space: nowrap; border-bottom: 1px solid #ddd; }
-        .cat-bar span { font-size: 13px; font-weight: 600; cursor: pointer; color: #555; }
-        .cat-bar span:hover { color: var(--konga-red); }
+        /* Product Grid: Side-by-Side */
+        .content-area { flex: 1; }
+        .product-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+            gap: 20px; 
+        }
 
-        /* Product Grid */
-        .container { max-width: 1200px; margin: 20px auto; padding: 0 15px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
-        .card { background: white; border-radius: 8px; padding: 15px; text-align: center; border: 1px solid #eee; transition: 0.2s; cursor: pointer; position: relative; }
-        .card:hover { box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .card img { max-width: 100%; height: 150px; object-fit: contain; }
-        .card h3 { font-size: 14px; margin: 10px 0; height: 35px; overflow: hidden; }
-        .price { font-weight: 700; color: #333; font-size: 18px; margin: 5px 0; }
-        .add-btn { background: var(--konga-red); color: white; border: none; width: 100%; padding: 10px; border-radius: 4px; font-weight: bold; cursor: pointer; }
+        /* Luxury Cards */
+        .card { 
+            background: white; 
+            border-radius: 20px; 
+            padding: 15px; 
+            border: 1px solid #eee; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            display: flex; 
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 20px 30px rgba(0,0,0,0.05); border-color: var(--gold); }
+        .card img { width: 100%; height: 180px; object-fit: contain; border-radius: 12px; background: #fafafa; }
+        .card-info { padding: 15px 5px; }
+        .card-cat { font-size: 10px; text-transform: uppercase; color: #999; letter-spacing: 1px; }
+        .card-title { font-size: 15px; font-weight: 600; margin: 5px 0; color: #333; height: 40px; overflow: hidden; }
+        .card-price { font-size: 20px; font-weight: 800; color: var(--dark); margin: 10px 0; }
+        
+        .buy-btn { 
+            background: var(--dark); 
+            color: white; 
+            border: none; 
+            padding: 12px; 
+            border-radius: 12px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            transition: 0.3s;
+        }
+        .buy-btn:hover { background: var(--konga); }
 
-        /* Views */
-        .view { display: none; }
-        .active { display: block; }
+        /* Footer */
+        footer { background: var(--dark); color: #888; padding: 60px 5%; margin-top: 50px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
+        .footer-col h5 { color: white; margin-bottom: 20px; font-size: 18px; }
+        .copyright { text-align: center; padding-top: 40px; margin-top: 40px; border-top: 1px solid #222; font-size: 12px; }
 
-        /* Cart & Details */
-        #cart-view, #details-view { background: white; padding: 30px; border-radius: 8px; margin-top: 20px; }
-        .founder-tag { text-align: center; padding: 10px; background: #eee; font-size: 10px; color: #777; letter-spacing: 1px; }
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .main-wrapper { flex-direction: column; }
+            aside { width: 100%; position: relative; top: 0; }
+            .product-grid { grid-template-columns: 1fr 1fr; gap: 10px; } /* Side by side on mobile */
+            .card { padding: 10px; }
+            .card img { height: 140px; }
+        }
     </style>
 </head>
 <body>
 
-<div class="founder-tag">FOUNDERS: MANUFOR GLORY EBUBE & EMMANUEL OPOKE OBINNA</div>
+<nav>
+    <div class="logo" onclick="location.reload()">AFFINIXIA</div>
+    <div class="nav-tools">
+        <div class="cart-status" id="cart-btn">CART (0)</div>
+    </div>
+</nav>
 
-<header>
-    <div class="top-nav">
-        <div class="logo" onclick="showView('home')">AFFINIXIA</div>
-        <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Search gadgets, electronics...">
-            <button onclick="search()">SEARCH</button>
-        </div>
-        <div class="cart-icon" onclick="showView('cart')">
-            🛒 <span id="cart-count">0</span>
-        </div>
-    </div>
-    <div class="cat-bar">
-        <span onclick="filterCat('All')">All Categories</span>
-        <span onclick="filterCat('Phone')">Phones & Tablets</span>
-        <span onclick="filterCat('Laptop')">Laptops</span>
-        <span onclick="filterCat('Audio')">Audio</span>
-        <span onclick="filterCat('Watch')">Watches</span>
-    </div>
-</header>
+<div class="main-wrapper">
+    <aside>
+        <h4>Categories</h4>
+        <button class="filter-btn" onclick="filter('All')">✨ All Products</button>
+        <button class="filter-btn" onclick="filter('Beauty')">💄 Beauty</button>
+        <button class="filter-btn" onclick="filter('Fragrances')">🌬️ Fragrances</button>
+        <button class="filter-btn" onclick="filter('Furniture')">🛋️ Furniture</button>
+        <button class="filter-btn" onclick="filter('Groceries')">🍎 Groceries</button>
+        <hr style="border:0; border-top:1px solid #eee; margin: 20px 0;">
+        <p style="font-size: 11px; color:#999">Curated by<br><b>Emmanuel & Glory</b></p>
+    </aside>
 
-<div class="container">
-    <div id="home-view" class="view active">
-        <h2 id="cat-title">Featured Gadgets</h2>
-        <div class="grid" id="product-grid"></div>
-    </div>
-
-    <div id="cart-view" class="view">
-        <h2>Your Shopping Cart</h2>
-        <div id="cart-items">Your cart is empty.</div>
-        <hr>
-        <button class="add-btn" style="width: auto;" onclick="showView('home')">Continue Shopping</button>
-        <button class="add-btn" style="width: auto; background: green;" onclick="alert('Proceeding to Secure Checkout...')">Checkout Now</button>
-    </div>
-
-    <div id="details-view" class="view">
-        <div id="product-details"></div>
-    </div>
+    <main class="content-area">
+        <h2 id="view-title">New Arrivals</h2>
+        <div class="product-grid" id="grid">
+            </div>
+    </main>
 </div>
 
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col">
+            <div class="logo">AFFINIXIA</div>
+            <p>The sovereign choice for high-end gadgets and lifestyle essentials. Quality guaranteed.</p>
+        </div>
+        <div class="footer-col">
+            <h5>Founders</h5>
+            <p>Manufor Glory Ebube<br><i>Chief Architect</i></p>
+            <p>Emmanuel Opoke Obinna<br><i>Digital Intelligence</i></p>
+        </div>
+        <div class="footer-col">
+            <h5>Customer Support</h5>
+            <p>Shipping Policy</p>
+            <p>Return Track</p>
+            <p>Affinixia SafePay</p>
+        </div>
+    </div>
+    <div class="copyright">
+        &copy; 2025 AFFINIXIA GLOBAL. All Rights Reserved. Designed for Excellence.
+    </div>
+</footer>
+
 <script>
-    const products = [];
-    const names = ["iPhone 15 Pro", "Samsung S24 Ultra", "MacBook Air M3", "Sony WH-1000XM5", "Apple Watch Ultra", "Dell XPS 13", "PS5 Console", "Nintendo Switch", "Bose Earbuds", "HP Spectre x360"];
-    const cats = ["Phone", "Phone", "Laptop", "Audio", "Watch", "Laptop", "Gaming", "Gaming", "Audio", "Laptop"];
-    
-    // GENERATE 50 PRODUCTS AUTOMATICALLY
-    for(let i = 1; i <= 50; i++) {
-        let nameBase = names[i % names.length];
-        products.push({
-            id: i,
-            name: `${nameBase} Edition ${i}`,
-            price: Math.floor(Math.random() * (1500 - 100) + 100),
-            cat: cats[i % cats.length],
-            img: `https://picsum.photos/seed/${i+50}/300/300`
-        });
-    }
+    // DATA AUTOMATION: Using the JSON you provided
+    const rawData = [
+        {"id":1,"title":"Essence Mascara Lash Princess","category":"beauty","price":9.99,"img":"https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/thumbnail.webp"},
+        {"id":2,"title":"Eyeshadow Palette with Mirror","category":"beauty","price":19.99,"img":"https://cdn.dummyjson.com/product-images/beauty/eyeshadow-palette-with-mirror/thumbnail.webp"},
+        {"id":3,"title":"Powder Canister","category":"beauty","price":14.99,"img":"https://cdn.dummyjson.com/product-images/beauty/powder-canister/thumbnail.webp"},
+        {"id":6,"title":"Calvin Klein CK One","category":"fragrances","price":49.99,"img":"https://cdn.dummyjson.com/product-images/fragrances/calvin-klein-ck-one/thumbnail.webp"},
+        {"id":7,"title":"Chanel Coco Noir Eau De","category":"fragrances","price":129.99,"img":"https://cdn.dummyjson.com/product-images/fragrances/chanel-coco-noir-eau-de/thumbnail.webp"},
+        {"id":11,"title":"Annibale Colombo Bed","category":"furniture","price":1899.99,"img":"https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-bed/thumbnail.webp"},
+        {"id":12,"title":"Annibale Colombo Sofa","category":"furniture","price":2499.99,"img":"https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-sofa/thumbnail.webp"},
+        {"id":17,"title":"Beef Steak","category":"groceries","price":12.99,"img":"https://cdn.dummyjson.com/product-images/groceries/beef-steak/thumbnail.webp"},
+        {"id":22,"title":"Dog Food","category":"groceries","price":10.99,"img":"https://cdn.dummyjson.com/product-images/groceries/dog-food/thumbnail.webp"},
+        {"id":30,"title":"Kiwi","category":"groceries","price":2.49,"img":"https://cdn.dummyjson.com/product-images/groceries/kiwi/thumbnail.webp"}
+    ];
 
-    let cart = [];
+    let cartCount = 0;
 
-    function renderProducts(list) {
-        const grid = document.getElementById('product-grid');
-        grid.innerHTML = list.map(p => `
+    function render(items) {
+        const grid = document.getElementById('grid');
+        grid.innerHTML = items.map(p => `
             <div class="card">
-                <img src="${p.img}" onclick="showDetails(${p.id})">
-                <h3>${p.name}</h3>
-                <div class="price">$${p.price}</div>
-                <button class="add-btn" onclick="addToCart(${p.id})">Add to Cart</button>
+                <div>
+                    <img src="${p.img}" alt="${p.title}">
+                    <div class="card-info">
+                        <div class="card-cat">${p.category}</div>
+                        <div class="card-title">${p.title}</div>
+                        <div class="card-price">$${p.price}</div>
+                    </div>
+                </div>
+                <button class="buy-btn" onclick="addToCart()">ADD TO CART</button>
             </div>
         `).join('');
     }
 
-    function showView(viewId) {
-        document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-        document.getElementById(viewId + '-view').classList.add('active');
-        window.scrollTo(0,0);
+    function filter(cat) {
+        document.getElementById('view-title').innerText = cat === 'All' ? 'New Arrivals' : cat;
+        if(cat === 'All') render(rawData);
+        else render(rawData.filter(p => p.category.toLowerCase() === cat.toLowerCase()));
     }
 
-    function addToCart(id) {
-        const p = products.find(x => x.id === id);
-        cart.push(p);
-        document.getElementById('cart-count').innerText = cart.length;
-        updateCartUI();
+    function addToCart() {
+        cartCount++;
+        document.getElementById('cart-btn').innerText = `CART (${cartCount})`;
     }
 
-    function updateCartUI() {
-        const container = document.getElementById('cart-items');
-        if(cart.length === 0) {
-            container.innerHTML = "Your cart is empty.";
-            return;
-        }
-        let total = cart.reduce((sum, p) => sum + p.price, 0);
-        container.innerHTML = cart.map(p => `<p>${p.name} - <b>$${p.price}</b></p>`).join('') + `<h3>Total: $${total}</h3>`;
-    }
-
-    function showDetails(id) {
-        const p = products.find(x => x.id === id);
-        document.getElementById('product-details').innerHTML = `
-            <div style="display: flex; gap: 40px; flex-wrap: wrap;">
-                <img src="${p.img}" style="max-width: 400px; border-radius: 10px;">
-                <div>
-                    <h1>${p.name}</h1>
-                    <p class="price" style="font-size: 30px;">$${p.price}</p>
-                    <p>Verified Affinixia Gadget. Certified by Emmanuel & Glory.</p>
-                    <button class="add-btn" onclick="addToCart(${p.id})">Add to Cart</button>
-                    <button class="add-btn" style="background: #555; margin-top: 10px;" onclick="showView('home')">Back to Home</button>
-                </div>
-            </div>
-        `;
-        showView('details');
-    }
-
-    function filterCat(cat) {
-        if(cat === 'All') renderProducts(products);
-        else renderProducts(products.filter(p => p.cat === cat));
-        document.getElementById('cat-title').innerText = cat + " Selection";
-        showView('home');
-    }
-
-    function search() {
-        const q = document.getElementById('searchInput').value.toLowerCase();
-        const filtered = products.filter(p => p.name.toLowerCase().includes(q));
-        renderProducts(filtered);
-        showView('home');
-    }
-
-    // Initialize
-    renderProducts(products);
+    // Initialize with all products
+    render(rawData);
 </script>
 
 </body>
 </html>
+
