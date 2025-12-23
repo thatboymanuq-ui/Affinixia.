@@ -3,47 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AFFINIXIA | AI Automated Hub</title>
+    <title>AFFINIXIA | Luxury Marketplace</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #d4af37; --cyber-blue: #00f2ff; --dark: #0a0a0b; --glass: rgba(255, 255, 255, 0.03); }
+        :root { --gold: #c5a059; --light-gold: #f4ece1; --dark: #1a1a1a; --white: #ffffff; }
         * { box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; transition: all 0.3s ease; }
         
-        body { margin: 0; background: var(--dark); color: #ffffff; overflow-x: hidden; }
+        body { margin: 0; background: #fafafa; color: var(--dark); overflow-x: hidden; }
 
-        /* AI Protocol Header */
+        /* Luxury Header */
         nav { 
-            background: rgba(10, 10, 11, 0.8);
-            backdrop-filter: blur(20px);
+            background: var(--white);
             padding: 20px 5%;
             display: flex; justify-content: space-between; align-items: center;
             position: sticky; top: 0; z-index: 1000;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            border-bottom: 2px solid var(--light-gold);
         }
         .logo { 
-            font-weight: 800; font-size: 26px; letter-spacing: 5px; color: var(--gold);
-            text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+            font-weight: 800; font-size: 28px; letter-spacing: 6px; color: var(--gold);
+            text-transform: uppercase;
         }
 
-        /* Layout Container */
+        /* App Layout */
         .app-container { display: flex; max-width: 1600px; margin: 30px auto; gap: 30px; padding: 0 20px; }
 
-        /* Sidebar: Protocol Filters */
+        /* Elegant Sidebar */
         aside { 
-            width: 280px; background: var(--glass); border-radius: 24px; padding: 30px; 
-            height: fit-content; border: 1px solid rgba(255,255,255,0.1);
+            width: 260px; background: var(--white); border-radius: 20px; padding: 30px; 
+            height: fit-content; border: 1px solid var(--light-gold);
             position: sticky; top: 110px;
         }
         .filter-btn { 
-            display: block; width: 100%; text-align: left; padding: 12px 20px; 
-            margin-bottom: 8px; border: none; background: transparent; color: #aaa;
-            cursor: pointer; border-radius: 12px; font-weight: 600;
+            display: block; width: 100%; text-align: left; padding: 12px 15px; 
+            margin-bottom: 5px; border: none; background: transparent; color: #777;
+            cursor: pointer; border-radius: 10px; font-weight: 600; font-size: 14px;
         }
         .filter-btn:hover, .filter-btn.active { 
-            background: var(--gold); color: black; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            background: var(--light-gold); color: var(--gold);
         }
 
-        /* Side-by-Side Product Grid */
+        /* Product Grid */
         .content-main { flex: 1; }
         .product-grid { 
             display: grid; 
@@ -51,141 +50,150 @@
             gap: 25px; 
         }
 
-        /* Cyber Product Card */
+        /* Luxury Product Card */
         .card { 
-            background: var(--glass); border-radius: 28px; padding: 20px;
-            border: 1px solid rgba(255,255,255,0.05); position: relative;
+            background: var(--white); border-radius: 20px; padding: 20px;
+            border: 1px solid #eee; position: relative;
             display: flex; flex-direction: column; justify-content: space-between;
         }
         .card:hover { 
-            border-color: var(--gold); background: rgba(255,255,255,0.06);
-            transform: translateY(-10px);
+            border-color: var(--gold);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(197, 160, 89, 0.1);
         }
         .card img { 
-            width: 100%; height: 220px; object-fit: contain; 
-            border-radius: 20px; background: rgba(0,0,0,0.2);
+            width: 100%; height: 240px; object-fit: contain; 
+            border-radius: 15px; background: #fff;
         }
-        .card-tag { 
-            position: absolute; top: 30px; right: 30px; background: var(--gold);
-            color: black; font-size: 10px; font-weight: 800; padding: 4px 10px; border-radius: 8px;
-        }
-        .price { font-size: 24px; font-weight: 800; color: #fff; margin: 15px 0; }
+        .price { font-size: 22px; font-weight: 800; color: var(--gold); margin: 15px 0; }
         
-        .buy-btn { 
-            width: 100%; background: white; color: black; border: none;
-            padding: 15px; border-radius: 15px; font-weight: 800; cursor: pointer;
+        /* Buttons */
+        .cart-btn { 
+            width: 100%; background: var(--dark); color: var(--white); border: none;
+            padding: 14px; border-radius: 12px; font-weight: 700; cursor: pointer;
+            text-transform: uppercase; letter-spacing: 1px; font-size: 12px;
         }
-        .buy-btn:hover { background: var(--gold); letter-spacing: 1px; }
+        .cart-btn:hover { background: var(--gold); }
 
-        /* Automated Footer */
+        /* AI Transaction Overlay */
+        #ai-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255,255,255,0.95); z-index: 9999;
+            flex-direction: column; align-items: center; justify-content: center;
+            color: var(--gold); font-weight: bold;
+        }
+        .ai-loader {
+            width: 50px; height: 50px; border: 5px solid var(--light-gold);
+            border-top: 5px solid var(--gold); border-radius: 50%;
+            animation: spin 1s linear infinite; margin-bottom: 20px;
+        }
+
         footer { 
-            background: #000; padding: 80px 10%; margin-top: 100px;
-            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            background: var(--white); padding: 60px 10%; margin-top: 80px;
+            border-top: 1px solid var(--light-gold); text-align: center;
         }
-        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 50px; }
-        .founder-tag { color: var(--gold); font-size: 12px; letter-spacing: 2px; margin-bottom: 10px; display: block;}
 
-        /* Mobile Optimization: Force Side-by-Side */
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Mobile Adjustments */
         @media (max-width: 768px) {
             .app-container { flex-direction: column; }
-            aside { width: 100%; position: relative; top: 0; display: flex; overflow-x: auto; gap: 10px; padding: 15px; }
-            .filter-btn { white-space: nowrap; width: auto; }
-            .product-grid { grid-template-columns: 1fr 1fr; gap: 15px; } /* Essential side-by-side */
-            .card { padding: 12px; border-radius: 15px; }
-            .card img { height: 140px; }
-            .price { font-size: 18px; }
+            aside { width: 100%; display: flex; overflow-x: auto; padding: 10px; border: none; background: none; }
+            .filter-btn { white-space: nowrap; width: auto; background: white; border: 1px solid #eee; }
+            .product-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+            .card { padding: 12px; }
+            .card img { height: 160px; }
         }
     </style>
 </head>
 <body>
 
+<div id="ai-overlay">
+    <div class="ai-loader"></div>
+    <div id="ai-status">AI TRANSACTION PROTOCOL INITIATING...</div>
+</div>
+
 <nav>
     <div class="logo">AFFINIXIA</div>
-    <div id="status-light" style="color: var(--cyber-blue); font-size: 12px; font-weight: bold;">● AI PROTOCOL ACTIVE</div>
+    <div style="font-size: 11px; font-weight: bold; border: 1px solid var(--gold); padding: 5px 10px; border-radius: 5px; color: var(--gold);">
+        SECURE AI GATEWAY
+    </div>
 </nav>
 
 <div class="app-container">
-    <aside id="sidebar">
-        <span class="founder-tag">SYSTEM FILTERS</span>
-        <button class="filter-btn active" onclick="loadCategory('all')">OVERVIEW</button>
-        <button class="filter-btn" onclick="loadCategory('laptops')">LAPTOPS</button>
-        <button class="filter-btn" onclick="loadCategory('smartphones')">SMARTPHONES</button>
-        <button class="filter-btn" onclick="loadCategory('fragrances')">FRAGRANCE</button>
-        <button class="filter-btn" onclick="loadCategory('furniture')">INTERIOR</button>
+    <aside>
+        <p style="font-size: 10px; color: var(--gold); font-weight: 800; letter-spacing: 2px;">CATEGORIES</p>
+        <button class="filter-btn active" onclick="loadCategory('all')">Global Overview</button>
+        <button class="filter-btn" onclick="loadCategory('smartphones')">Smartphones</button>
+        <button class="filter-btn" onclick="loadCategory('laptops')">Laptops</button>
+        <button class="filter-btn" onclick="loadCategory('fragrances')">Fragrances</button>
+        <button class="filter-btn" onclick="loadCategory('furniture')">Furniture</button>
     </aside>
 
     <main class="content-main">
-        <h1 id="cat-title" style="margin-bottom: 40px; font-weight: 300;">Scanning <span style="color: var(--gold)">Affinixia Database...</span></h1>
         <div class="product-grid" id="main-grid">
             </div>
     </main>
 </div>
 
 <footer>
-    <div class="footer-grid">
-        <div>
-            <div class="logo" style="font-size: 20px;">AFFINIXIA</div>
-            <p style="color: #666; line-height: 1.8;">Automated supply chain protocol for elite tech and lifestyle assets. Engineered by the Affinixia Sovereign Group.</p>
-        </div>
-        <div>
-            <span class="founder-tag">ARCHITECTS</span>
-            <p>Emmanuel Opoke<br>Manufor Glory</p>
-        </div>
-        <div>
-            <span class="founder-tag">SECURITY</span>
-            <p>SSL Encryption<br>AI Fraud Protocol<br>24/7 Monitoring</p>
-        </div>
-    </div>
+    <div style="color: var(--gold); font-weight: 800; margin-bottom: 20px;">AFFINIXIA SOVEREIGN</div>
+    <p style="font-size: 13px; color: #888;">Architects: <b>Manufor Glory</b> & <b>Emmanuel Opoke Obinna</b></p>
+    <p style="font-size: 11px; color: #bbb;">&copy; 2025 All Rights Reserved. AI Enabled Marketplace.</p>
 </footer>
 
 <script>
     const grid = document.getElementById('main-grid');
 
-    // THE AI PROTOCOL: Automated Data Fetching
-    async function initProtocol(category = '') {
-        grid.innerHTML = `<p style="color: var(--gold)">Re-routing data packets...</p>`;
-        
-        let url = 'https://dummyjson.com/products?limit=100'; // FETCING 100 PRODUCTS AUTOMATICALLY
-        if(category && category !== 'all') {
-            url = `https://dummyjson.com/products/category/${category}`;
-        }
+    async function fetchProducts(category = '') {
+        grid.innerHTML = `<p style="color: var(--gold); font-weight:bold;">Initializing AI Data Stream...</p>`;
+        let url = 'https://dummyjson.com/products?limit=50';
+        if(category && category !== 'all') url = `https://dummyjson.com/products/category/${category}`;
 
         try {
             const response = await fetch(url);
             const data = await response.json();
-            displayProducts(data.products);
-            document.getElementById('cat-title').innerHTML = `Protocol: <span style="color:var(--gold)">${category.toUpperCase() || 'GLOBAL'}</span>`;
-        } catch (error) {
-            grid.innerHTML = `<p>Protocol Error: Connection Interrupted</p>`;
-        }
+            display(data.products);
+        } catch (e) { grid.innerHTML = "Connection Error"; }
     }
 
-    function displayProducts(products) {
+    function display(products) {
         grid.innerHTML = products.map(p => `
             <div class="card">
-                <span class="card-tag">NEW ITEM</span>
+                <img src="${p.thumbnail}" alt="Product">
                 <div>
-                    <img src="${p.thumbnail}" alt="Tech Asset">
-                    <h3 style="font-size: 16px; margin: 15px 0 5px 0;">${p.title}</h3>
-                    <p style="font-size: 12px; color: #666; margin-bottom: 10px;">${p.brand || 'Premium'}</p>
+                    <div style="font-size: 11px; color: var(--gold); font-weight: 800; margin-top: 15px;">${p.category.toUpperCase()}</div>
+                    <h3 style="font-size: 16px; margin: 5px 0;">${p.title}</h3>
                     <div class="price">$${p.price}</div>
                 </div>
-                <button class="buy-btn" onclick="alert('Item locked in cart!')">ACQUIRE ASSET</button>
+                <button class="cart-btn" onclick="startAiTransaction('${p.title}')">Add to Cart</button>
             </div>
         `).join('');
     }
 
-    function loadCategory(cat) {
-        // Update button UI
-        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-        event.target.classList.add('active');
-        initProtocol(cat);
+    // AI TRANSACTION PROTOCOL
+    function startAiTransaction(item) {
+        const overlay = document.getElementById('ai-overlay');
+        const status = document.getElementById('ai-status');
+        overlay.style.display = 'flex';
+        
+        setTimeout(() => { status.innerText = "AI VERIFYING STOCK..."; }, 800);
+        setTimeout(() => { status.innerText = "AI AUTHENTICATING SECURE TRANSACTION..."; }, 1600);
+        setTimeout(() => { 
+            overlay.style.display = 'none';
+            status.innerText = "AI TRANSACTION PROTOCOL INITIATING...";
+            alert(item + " successfully added to your secure cart.");
+        }, 2500);
     }
 
-    // Start the automation
-    initProtocol();
+    function loadCategory(cat) {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        event.target.classList.add('active');
+        fetchProducts(cat);
+    }
+
+    fetchProducts();
 </script>
 
 </body>
 </html>
-
